@@ -25,9 +25,9 @@ public class GameController {
 
 	private int redScore = 0;
 	private int blackScore = 0;
-	private Color currentPlayer = Color.RED;
+	private Color CurrentPlayer = Color.RED;
 
-	private boolean singleplayer = false;
+	private boolean SinglePlayer = false;
 	
 	private MenuPanel menu;
 
@@ -50,13 +50,13 @@ public class GameController {
 	}
 
 	public void playSingleplayer() {
-		singleplayer = true;
-		frame.setCurrentTeamText("It's Your Turn");
+		SinglePlayer = true;
+		frame.setCurrentTeamText("It's Your Turn!");
 		startGame();
 	}
 
 	public void playMultiplayer() {
-		singleplayer = false;
+		SinglePlayer = false;
 		startGame();
 	}
 
@@ -122,7 +122,7 @@ public class GameController {
 
 	public void spotSelected(BoardSpot spot) {
 		if (spot.hasPiece()) {
-			if (spot.getPiece().getColor() == currentPlayer) {
+			if (spot.getPiece().getColor() == CurrentPlayer) {
 				selectSpot(spot);
 				clearBorders();
 				spot.addBorder();
@@ -180,19 +180,19 @@ public class GameController {
 	}
 
 	public void swapCurrentPlayer() {
-		if (currentPlayer == Color.RED) {
-			currentPlayer = Color.BLACK;
-			if (singleplayer) {
+		if (CurrentPlayer == Color.RED) {
+			CurrentPlayer = Color.BLACK;
+			if (SinglePlayer) {
 				doAIMove();
 			}
 		} else {
-			currentPlayer = Color.RED;
+			CurrentPlayer = Color.RED;
 		}
-		frame.updateCurrentTeamText(currentPlayer);
+		frame.updateCurrentTeamText(CurrentPlayer);
 	}
 
 	public void doAIMove() {
-		if (currentPlayer != Color.BLACK)
+		if (CurrentPlayer != Color.BLACK)
 			return;
 
 		CanMoveResult move = AIHelper.findPieceToMove();
@@ -217,6 +217,6 @@ public class GameController {
 	}
 	
 	public boolean isSingleplayer() {
-		return singleplayer;
+		return SinglePlayer;
 	}
 }
